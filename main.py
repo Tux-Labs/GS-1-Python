@@ -1,6 +1,7 @@
 historicos = []
 histcont = 0
 plantas = [['Alface', 'T°C: 22°C | Umidade: 60%'], ['Tomate', 'T°C: 22°C | Umidade: 60%'], ['Batata', 'T°C: 22°C | Umidade: 60%']]
+sementes = [['Alface', 20], ['Tomate', 15], ['Batata', 10]]
 div = '-------------------------------------'
 
 def main():
@@ -9,7 +10,7 @@ def main():
         print("====================================")
         print(f"{'PROTOCOLO: Éden':^36s}")
         print("====================================\n")
-        print("1. Solução\n2. Estufas\n3. Opção 3\n4. Opção 4\n5. Histórico\n0. Sair")
+        print("1. Solução\n2. Estufas\n3. Almoxarifado\n4. Opção 4\n5. Histórico\n0. Sair")
         print("Digite a opção que você deseja acessar\n")
         op = input("- ")
         if op == '1':
@@ -68,8 +69,66 @@ def op2():
             print("Opção inválida")
 
 def op3():
-    historicos.append("Op3")
-    print()
+    historicos.append("Almoxarifado")
+    while True:
+        print(f"{div}\n")
+        print("ALMOXARIFADO DE SEMENTES")
+        print("1. Ver sementes disponíveis")
+        print("2. Adicionar sementes")
+        print("3. Usar semente")
+        print("0. Voltar")
+        print("Digite a opção que você deseja acessar\n")
+
+        op = input("- ")
+
+        if op == '1':
+            print(f"{div}\n")
+            print("Sementes disponíveis:")
+            for semente in sementes:
+                print(f"{semente[0]} - {semente[1]} unidades")
+            input("\nDigite algo para voltar: ")
+
+        elif op == '2':
+            nome = input("Digite o nome da semente: ").lower().capitalize()
+            qtd = int(input("Digite a quantidade: "))
+
+            encontrou = False
+
+            for semente in sementes:
+                if semente[0] == nome:
+                    semente[1] += qtd
+                    encontrou = True
+                    print(f"{qtd} sementes de {nome} adicionadas.")
+
+            if encontrou == False:
+                sementes.append([nome, qtd])
+                print(f"{nome} adicionada ao almoxarifado.")
+
+        elif op == '3':
+            nome = input("Digite a semente que deseja usar: ").lower().capitalize()
+
+            encontrou = False
+
+            for semente in sementes:
+                if semente[0] == nome:
+                    encontrou = True
+
+                    if semente[1] > 0:
+                        semente[1] -= 1
+                        print(f"Uma semente de {nome} foi enviada para a estufa.")
+                    else:
+                        print("Não há sementes disponíveis.")
+
+            if encontrou == False:
+                print("Semente não encontrada.")
+
+            input("\nDigite algo para voltar: ")
+
+        elif op == '0':
+            return
+
+        else:
+            print("Opção inválida")
 
 def op4():
     historicos.append("Op4")
