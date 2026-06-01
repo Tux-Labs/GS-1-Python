@@ -9,7 +9,7 @@ def main():
         print("====================================")
         print(f"{'PROTOCOLO: Éden':^36s}")
         print("====================================\n")
-        print("1. Solução\n2. Estufas\n3. Opção 3\n4. Opção 4\n5. Opção 5\n0. Sair")
+        print("1. Solução\n2. Estufas\n3. Opção 3\n4. Opção 4\n5. Histórico\n0. Sair")
         print("Digite a opção que você deseja acessar\n")
         op = input("- ")
         if op == '1':
@@ -29,7 +29,7 @@ def main():
         elif op == '0':
             return
         else:
-            print("Opção inválida\n")
+            print("\nOpção inválida\n")
 
 def op1():
     historicos.append("Solução")
@@ -68,12 +68,16 @@ def op2():
             print("Opção inválida")
 
 def op3():
+    historicos.append("Op3")
     print()
 
 def op4():
+    historicos.append("Op4")
     print()
 
 def op5():
-    print()
+    global histcont
+    print(f"Funções acessadas: {histcont}\nHistórico: {historicos}")
+    input("Digite algo para voltar: ")
 
 main()
